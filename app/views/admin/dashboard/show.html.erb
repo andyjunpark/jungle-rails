@@ -1,7 +1,18 @@
 <h1>Admin::Dashboard#show</h1>
-<p>Welcome back <%= @admin_username %>!</p>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<div class="well">
+  <h4>Welcome back <%= @admin_username %>!</h4>
+  <p>Find me in app/views/admin/dashboard/show.html.erb</p>
+</div>
 
-<h2>You have:</h2>
-<li><%= @count_products %> products</li>
-<li><%= @count_categories%> categories</li>
+<h4>You have:</h4>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th colspan="2">Products</th>
+        <td><%= @count_products %></td>
+      <th>Categories</th>
+        <td><%= @count_categories%></td>
+    </tr>
+  </thead>
+</table>
