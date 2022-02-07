@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160625062916) do
+ActiveRecord::Schema.define(version: 20220207112525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20160625062916) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "resource_id"
+    t.string  "comment",     limit: 255
+    t.date    "created_at"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id",               null: false
+    t.integer "resource_id"
+    t.integer "like_amount", limit: 2
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -56,7 +69,33 @@ ActiveRecord::Schema.define(version: 20160625062916) do
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "resource_id"
+    t.integer "rating",      limit: 2
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.integer "user_id",                 null: false
+    t.integer "category_id",             null: false
+    t.string  "title",       limit: 255, null: false
+    t.string  "description", limit: 255, null: false
+    t.string  "url",         limit: 255, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_foreign_key "comments", "resources", name: "comments_resource_id_fkey", on_delete: :cascade
+  add_foreign_key "likes", "resources", name: "likes_resource_id_fkey", on_delete: :cascade
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
   add_foreign_key "products", "categories"
+  add_foreign_key "ratings", "resources", name: "ratings_resource_id_fkey", on_delete: :cascade
 end
