@@ -30,7 +30,7 @@ RSpec.describe Product, type: :model do
       expect(@product.errors.full_messages).to include(/Name can't be blank/)
     end
 
-    it "is valid with valid price"
+    it "is valid with valid price" do
       @category = Category.create(
         name: "instruments"
       )
@@ -42,7 +42,7 @@ RSpec.describe Product, type: :model do
       expect(@product.errors.full_messages).to include(/Price can't be blank/)
     end
 
-    it "is valid with valid quantity"
+    it "is valid with valid quantity" do
       @category = Category.create(
         name: "instruments"
       )
@@ -54,7 +54,7 @@ RSpec.describe Product, type: :model do
       expect(@product.errors.full_messages).to include(/Quantity can't be blank/)
     end
 
-    it "is valid with valid category"
+    it "is valid with valid category" do
       @category = Category.create(
         name: "instruments"
       )
