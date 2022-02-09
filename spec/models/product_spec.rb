@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
   describe 'Validations' do
-    # validates: all four fields are filled
+
     context "with name, price, quantity, and category" do
       it "is valid with all four fields set complete" do
         @category = Category.create(
@@ -18,7 +18,6 @@ RSpec.describe Product, type: :model do
       end
     end
 
-    # validates: name, presence true
     it "is valid with valid name" do
       @category = Category.create(
         name: "instruments"
@@ -31,7 +30,6 @@ RSpec.describe Product, type: :model do
       expect(@product.errors.full_messages).to include(/Name can't be blank/)
     end
 
-    # validates: price, presence true
     it "is valid with valid price"
       @category = Category.create(
         name: "instruments"
@@ -44,7 +42,6 @@ RSpec.describe Product, type: :model do
       expect(@product.errors.full_messages).to include(/Price can't be blank/)
     end
 
-    # validates: quantity, presence true
     it "is valid with valid quantity"
       @category = Category.create(
         name: "instruments"
@@ -56,9 +53,8 @@ RSpec.describe Product, type: :model do
       })
       expect(@product.errors.full_messages).to include(/Quantity can't be blank/)
     end
-    
-    # validates: category, presence true
-      it "is valid with valid category"
+
+    it "is valid with valid category"
       @category = Category.create(
         name: "instruments"
       )
